@@ -425,7 +425,7 @@ class FormHandler
      */
     private function validateReCaptcha()
     {
-        if ((new FormFieldsParser)->hasElement($this->form, 'recaptcha')) {
+        if (FormFieldsParser::hasElement($this->form, 'recaptcha')) {
             $keys = get_option('_fluentform_reCaptcha_details');
             $token = Arr::get($this->formData, 'g-recaptcha-response');
             $version = 'v2_visible';
@@ -451,7 +451,7 @@ class FormHandler
      */
     private function validateHCaptcha()
     {
-        if ((new FormFieldsParser)->hasElement($this->form, 'hcaptcha')) {
+        if (FormFieldsParser::hasElement($this->form, 'recaptcha')) {
             $keys = get_option('_fluentform_hCaptcha_details');
             $token = Arr::get($this->formData, 'hcaptcha-response');
             $isValid = HCaptcha::validate($token, $keys['secretKey']);
