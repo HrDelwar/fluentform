@@ -40,11 +40,12 @@
 
 <script>
     import recaptcha from './Recaptcha.vue';
+    import hcaptcha from './Hcaptcha.vue';
 
     export default {
         name: 'ItemDisabled',
         props: ['visibility', 'modal', 'value'],
-        components: { recaptcha },
+        components: { hcaptcha, recaptcha },
         data() {
             return {
                 contentComponent: '',

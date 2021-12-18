@@ -163,11 +163,16 @@ class Component
     private function getDisabledComponents()
     {
         $isReCaptchaDisabled = !get_option('_fluentform_reCaptcha_keys_status', false);
+        $isHCaptchaDisabled = !get_option('_fluentform_hCaptcha_keys_status', false);
 
         $disabled = array(
             'recaptcha'   => array(
                 'contentComponent' => 'recaptcha',
                 'disabled'         => $isReCaptchaDisabled
+            ),
+            'hcaptcha'   => array(
+                'contentComponent' => 'hcaptcha',
+                'disabled'         => $isHCaptchaDisabled
             ),
             'input_image' => array(
                 'disabled' => true
@@ -645,6 +650,7 @@ class Component
             'TextArea@compile'      => ['fluentform_render_item_textarea'],
             'DateTime@compile'      => ['fluentform_render_item_input_date'],
             'Recaptcha@compile'     => ['fluentform_render_item_recaptcha'],
+            'Hcaptcha@compile'     => ['fluentform_render_item_hcaptcha'],
             'Container@compile'     => ['fluentform_render_item_container'],
             'CustomHtml@compile'    => ['fluentform_render_item_custom_html'],
             'SectionBreak@compile'  => ['fluentform_render_item_section_break'],

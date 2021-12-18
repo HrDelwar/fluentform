@@ -29,6 +29,11 @@ class MenuProvider extends Provider
         );
 
         $this->app->addAction(
+            'fluentform_global_settings_component_hCaptcha',
+            '\FluentForm\App\Modules\Renderer\GlobalSettings\Settings@render'
+        );
+
+        $this->app->addAction(
             'ff_fluentform_form_application_view_editor',
             '\FluentForm\App\Modules\Registerer\Menu@renderEditor'
         );

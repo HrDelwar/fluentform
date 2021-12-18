@@ -99,6 +99,9 @@ return array(
 	'recaptcha'           => array(
 		'recaptcha',
 	),
+	'hcaptcha'           => array(
+		'hcaptcha',
+	),
 	'custom_html'         => array(
 		'custom html',
 	),

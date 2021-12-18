@@ -127,6 +127,7 @@ With WP Fluent Forms, you can organize your submitted entries according to their
 - Hidden Field
 - Section Break
 - Google reCaptcha
+- hCaptcha
 - Terms and Conditions
 - GDPR Agreement Field
 - Password Field

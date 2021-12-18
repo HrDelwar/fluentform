@@ -744,6 +744,7 @@ class Menu
             $this->app->request->get('component', 'settings')
         );
 
+
         $currentComponent = sanitize_key($currentComponent);
 
         $components = apply_filters('fluentform_global_settings_components', []);
@@ -751,6 +752,11 @@ class Menu
         $components['reCAPTCHA'] = [
             'hash' => 're_captcha',
             'title' => 'reCAPTCHA',
+        ];
+
+        $components['hCAPTCHA'] = [
+            'hash' => 'h_captcha',
+            'title' => 'hCAPTCHA',
         ];
 
         View::render('admin.settings.index', [

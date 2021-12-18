@@ -7,6 +7,7 @@ import ratings from './templates/ratings.vue'
 import netPromoter from './templates/netPromoter.vue'
 import formStep from './templates/formStep.vue'
 import recaptcha from './templates/recaptcha.vue'
+import hcaptcha from './templates/hcaptcha.vue'
 import inputText from './templates/inputText.vue'
 import inputSlider from './templates/inputSlider'
 import inputFile from './templates/inputFile.vue'
@@ -60,6 +61,7 @@ export default {
         ff_inputSlider: inputSlider,
         ff_shortcode: shortcode,
         ff_recaptcha: recaptcha,
+        ff_hcaptcha: hcaptcha,
         ff_inputRadio: inputRadio,
         ff_inputCheckable: inputCheckable,
         ff_nameFields: nameFields,

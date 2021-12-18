@@ -1182,6 +1182,22 @@ $defaultElements = array(
                 'template' => 'recaptcha',
             ),
         ),
+        'hcaptcha' => array(
+            'index' => 2,
+            'element' => 'hcaptcha',
+            'attributes' => array('name' => 'hcaptcha'),
+            'settings' => array(
+                'label' => '',
+                'label_placement' => '',
+                'validation_rules' => array(),
+            ),
+            'editor_options' => array(
+                'title' => __('hCaptcha', 'fluentform'),
+                'icon_class' => 'ff-edit-recaptha',
+                'why_disabled_modal' => 'hcaptcha',
+                'template' => 'hcaptcha',
+            ),
+        ),
         'shortcode' => array(
             'index' => 4,
             'element' => 'shortcode',

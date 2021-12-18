@@ -5,6 +5,7 @@ namespace FluentForm\App\Modules\Settings;
 use FluentForm\Framework\Request\Request;
 use FluentForm\Framework\Helpers\ArrayHelper;
 use FluentForm\App\Modules\ReCaptcha\ReCaptcha;
+use FluentForm\App\Modules\HCaptcha\HCaptcha;
 use FluentForm\App\Services\Integrations\MailChimp\MailChimp;
 
 /**
@@ -55,6 +56,7 @@ class Settings
 
         $allowedMethods = [
             'storeReCaptcha',
+            'storeHCaptcha',
             'storeSaveGlobalLayoutSettings',
             'storeMailChimpSettings',
             'storeEmailSummarySettings'
@@ -130,7 +132,7 @@ class Settings
                     'message' => __('Your reCaptcha is valid and saved.', 'fluentform'),
                     'status'  => $status
                 ], 200);
-            } else { // reCatcha is not valid.
+            } else { // reCaptcha is not valid.
                 $message = __('Sorry, Your reCaptcha is not valid, Please try again', 'fluentform');
             }
         } else { // The token is empty, so the user didn't verify their captcha.
@@ -141,6 +143,69 @@ class Settings
 
             if ($status) {
                 $message = __('Your reCaptcha details are already valid, So no need to save again.', 'fluentform');
+            }
+        }
+
+        wp_send_json_error([
+            'message' => $message,
+            'status'  => $status
+        ], 400);
+    }
+
+    public function storeHCaptcha()
+    {
+        $data = $this->request->get('hCaptcha');
+
+        if ($data == 'clear-settings') {
+            delete_option('_fluentform_hCaptcha_details');
+
+            update_option('_fluentform_hCaptcha_keys_status', false, 'no');
+
+            wp_send_json_success([
+                'message' => __('Your hCaptcha settings are deleted.', 'fluentform'),
+                'status'  => false
+            ], 200);
+        }
+
+        $token = ArrayHelper::get($data, 'token');
+        $secretKey = ArrayHelper::get($data, 'secretKey');
+
+        // If token is not empty meaning user verified their captcha.
+        if ($token) {
+            // Validate the hCaptcha response.
+            $status = HCaptcha::validate($token, $secretKey);
+
+            // hCaptcha is valid. So proceed to store.
+            if ($status) {
+                // Prepare captcha data.
+                $captchaData = [
+                    'siteKey'   => sanitize_text_field(ArrayHelper::get($data, 'siteKey')),
+                    'secretKey' => sanitize_text_field($secretKey),
+                ];
+
+                // Update the hCaptcha details with siteKey & secretKey.
+                update_option('_fluentform_hCaptcha_details', $captchaData, 'no');
+
+                // Update the hCaptcha validation status.
+                update_option('_fluentform_hCaptcha_keys_status', $status, 'no');
+
+                // Send success response letting the user know that
+                // that the hCaptcha is valid and saved properly.
+                wp_send_json_success([
+                    'message' => __('Your hCaptcha is valid and saved.', 'fluentform'),
+                    'status'  => $status
+                ], 200);
+            } else { // hCaptcha is not valid.
+                $message = __('Sorry, Your hCaptcha is not valid, Please try again', 'fluentform');
+            }
+        } else { // The token is empty, so the user didn't verify their captcha.
+            $message = __('Please validate your hCaptcha first and then hit save.', 'fluentform');
+
+            // Get the already stored hCaptcha status.
+            $status = get_option('_fluentform_hCaptcha_keys_status');
+
+            if ($status) {
+                $message = __('Your hCaptcha details are already valid, So no need to save again.', 'fluentform');
             }
         }
 

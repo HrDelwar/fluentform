@@ -4,6 +4,7 @@ import lang from 'element-ui/lib/locale/lang/en';
 
 import Settings from './Settings.vue';
 import reCaptcha from './reCaptcha.vue';
+import hCaptcha from './hCaptcha.vue';
 import pdf_settings from './Pdf.vue';
 import GeneralIntegrationSettings from './GeneralIntegrationSettings';
 import DoubleOptinSettings from './DoubleOptinSettings';
@@ -59,6 +60,7 @@ new Vue({
     components: {
         settings: Settings,
         re_captcha: reCaptcha,
+        h_captcha: hCaptcha,
         pdf_settings: pdf_settings,
         'general-integration-settings': GeneralIntegrationSettings,
         'double_optin_settings': DoubleOptinSettings
@@ -91,7 +93,6 @@ new Vue({
         if (hash) {
             this.setRoute(hash);
         }
-
         const that = this;
         jQuery('.ff_settings_list li a').on('click', function () {
             let hash = jQuery(this).attr('data-hash');

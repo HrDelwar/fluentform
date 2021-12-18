@@ -453,6 +453,7 @@ import Clipboard from 'clipboard';
 import List from '../components/nested-list.vue';
 import ListConversion from '../components/nested-list-conversion.vue';
 import recaptcha from '../components/modals/Recaptcha.vue';
+import hcaptcha from '../components/modals/Hcaptcha.vue';
 import searchElement from '../components/searchElement.vue';
 import EditorSidebar from '../components/EditorSidebar.vue';
 import RenameForm from '../components/modals/RenameForm.vue';
@@ -471,6 +472,7 @@ export default {
         List,
         ListConversion,
         recaptcha,
+        hcaptcha,
         RenameForm,
         ItemDisabled,
         submitButton,

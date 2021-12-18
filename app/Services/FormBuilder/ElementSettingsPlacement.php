@@ -330,6 +330,14 @@ return array(
             'validation_rules',
         ),
     ),
+    'hcaptcha' => array(
+        'general' => array(
+            'label',
+            'label_placement',
+            'name',
+            'validation_rules',
+        ),
+    ),
     'custom_html' => array(
         'general' => array(
             'html_codes',
