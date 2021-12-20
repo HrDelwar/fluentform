@@ -419,6 +419,31 @@
 
                 <div class="ff_settings_section">
                     <div class="ff_settings_body">
+
+                      <el-form ref="form-bottom" label-width="220px" label-position="left">
+                        <!--Reset Button-->
+                        <el-form-item>
+                          <div slot="label">
+                            Reset Button
+
+                            <el-tooltip class="item" placement="bottom-start" effect="light">
+                              <div slot="content">
+                                <h3>Reset Button</h3>
+
+                                <p>
+                                  Enable this to show reset button in from.
+                                </p>
+                              </div>
+
+                              <i class="el-icon-info el-text-info"/>
+                            </el-tooltip>
+                          </div>
+
+                          <el-switch active-color="#13ce66" v-model="formSettings.resetButton"/>
+                        </el-form-item>
+
+                      </el-form>
+
                         <div class="el-form-item">
                             <label class="el-form-item__label" style="width: 205px; text-align: left;">
                                 Extra CSS Form Class
@@ -579,7 +604,8 @@
                         helpMessagePlacement: 'with_label',
                         errorMessagePlacement: 'inline',
                         cssClassName: ''
-                    }
+                    },
+                    resetButton : false
                 }
             },
             fetchSettings() {
@@ -596,6 +622,9 @@
                                 settings.restrictions = {};
                             if (!settings.layout)
                                 settings.layout = {};
+
+                            if(!settings.resetButton)
+                              settings.resetButton = false;
 
                             if (!settings.restrictions.limitNumberOfEntries)
                                 settings.restrictions.limitNumberOfEntries = {};

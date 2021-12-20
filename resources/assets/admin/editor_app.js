@@ -102,6 +102,7 @@ new Vue({
             title: "",
             dropzone: [],
             submitButton: {},
+            resetButton:{},
             stepsWrapper: {},
             stepStart: {
                 element: "step_start",
@@ -177,6 +178,46 @@ new Vue({
                 title: "Submit Button"
             }
         },
+        resetButtonMock: {
+            uniqElKey: "el_" + Date.now(),
+            element: "button",
+            attributes: {
+                type: "reset",
+                class: ""
+            },
+            settings: {
+                align: "right",
+                background_color: "#F56C6C",
+                color:"#ffffff",
+                button_style: "red",
+                container_class: "",
+                help_message: "",
+                button_size: "md",
+                button_ui: {
+                    type: "default",
+                    text: "Reset Form",
+                    img_url: ""
+                },
+                conditional_logics: [],
+                normal_styles: {
+                    'backgroundColor' : '#F56C6C',
+                    'borderColor'     : '#F56C6C',
+                    'color'           : '#ffffff',
+                    'borderRadius'    : '',
+                    'minWidth'        : ''
+                },
+                hover_styles: {
+                    'backgroundColor' : '#F56C88',
+                    'borderColor'     : '#F56C88',
+                    'color'           : '#ffffff',
+                    'borderRadius'    : '',
+                    'minWidth'        : ''
+                }
+            },
+            editor_options: {
+                title: "Reset Button"
+            }
+        },
         loading: false,
         form_saving: false
     },
@@ -195,6 +236,7 @@ new Vue({
             this.form.title = form.title;
             this.form.dropzone = formData.fields || [];
             let button = formData.submitButton || JSON.parse(JSON.stringify(this.submitButtonMock));
+            let resetButton = formData.resetButton || JSON.parse(JSON.stringify(this.resetButtonMock));
 
             if (!button.settings.conditional_logics) {
                 // we will implement later
@@ -202,6 +244,7 @@ new Vue({
             }
 
             this.form.submitButton = button;
+            this.form.resetButton = resetButton;
 
             this.form.stepsWrapper = formData.stepsWrapper || this.form.stepsWrapper;
 
@@ -239,7 +282,8 @@ new Vue({
             this.form_saving = true;
             let formFields = {
                 fields: this.form.dropzone,
-                submitButton: this.form.submitButton
+                submitButton: this.form.submitButton,
+                resetButton: this.form.resetButton
             };
 
             if (!_ff.isEmpty(this.form.stepsWrapper)) {

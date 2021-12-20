@@ -14,7 +14,9 @@
 
 <script type="text/babel">
 
-    export default {
+  import {mapMutations} from "vuex";
+
+  export default {
         name: 'customButton',
         props: ['item'],
         data() {
@@ -67,6 +69,17 @@
                 styles.textAlign = this.item.settings.align;
                 return styles;
             }
+        },
+        methods: {
+          ...mapMutations({
+            updateSubmitButtonStatus : 'updateSubmitButtonStatus'
+          })
+        },
+        mounted(){
+          this.updateSubmitButtonStatus(false)
+        },
+        destroyed() {
+          this.updateSubmitButtonStatus(true)
         }
-    }
+  }
 </script>

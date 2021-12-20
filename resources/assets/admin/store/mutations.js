@@ -10,6 +10,10 @@ export default {
         }, 500);
     },
 
+    updateSubmitButtonStatus(state, payload){
+        state.showSubmitButton = payload
+    },
+
     loadEditorShortcodes(state, payload) {
         state.editorShortcodes = payload;
     }

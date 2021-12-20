@@ -151,7 +151,22 @@ class FormBuilder
         if ($hasStepWrapper) {
             do_action('fluentform_render_item_step_end', $form->fields['stepsWrapper']['stepEnd'], $form);
         } else {
-            do_action('fluentform_render_item_submit_button', $form->fields['submitButton'], $form);
+            $btn_wraper_class = $form->settings['resetButton'] ? 'ff-t-cell' : '' ;
+            ?>
+            <div class="ff-t-container">
+                <div class="<?php echo $btn_wraper_class ?>">
+                    <?php
+                    do_action('fluentform_render_item_submit_button', $form->fields['submitButton'], $form);
+                    ?>
+                </div>
+                <div class="<?php echo $btn_wraper_class ?>">
+                    <?php
+                    do_action('fluentform_render_item_reset_button', $form->fields['resetButton'], $form);
+                    ?>
+                </div>
+
+            </div>
+            <?php
         }
 
         $content = ob_get_clean();

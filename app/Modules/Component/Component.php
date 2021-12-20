@@ -650,6 +650,7 @@ class Component
             'CustomHtml@compile'    => ['fluentform_render_item_custom_html'],
             'SectionBreak@compile'  => ['fluentform_render_item_section_break'],
             'SubmitButton@compile'  => ['fluentform_render_item_submit_button'],
+            'ResetButton@compile' => ['fluentform_render_item_reset_button'],
             'SelectCountry@compile' => ['fluentform_render_item_select_country'],
 
             'TermsAndConditions@compile' => [

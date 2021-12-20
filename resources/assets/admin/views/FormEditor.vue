@@ -80,13 +80,27 @@
                     <!-- =========================
                         SUBMIT BUTTON
                     ============================== -->
-                    <div class="ff_default_submit_button_wrapper">
+                  <el-row>
+
+                    <el-col :span="showResetButton ? 12 : 24">
+                      <div v-if="showSubmitButton" class="ff_default_submit_button_wrapper">
                         <submitButton
                             v-if="Object.keys(submitButton).length"
                             :editItem="editItem"
                             :submitButton="submitButton"
                             :editSelected="editSelected"/>
-                    </div>
+                      </div>
+                    </el-col>
+
+                    <el-col :span="showSubmitButton ? 12 : 24" v-if="showResetButton">
+                      <reset-button
+                          :editItem="editItem"
+                          :resetButton="resetButton"
+                          :editSelected="editSelected"/>
+                    </el-col>
+
+                  </el-row>
+
 
                     <div v-if="!form.dropzone.length" class="ff-user-guide">
                         <div @click="introVisible = true" class="editor_play_video"><i class="el-icon-video-play"></i> Video Instruction</div>
@@ -458,6 +472,7 @@ import EditorSidebar from '../components/EditorSidebar.vue';
 import RenameForm from '../components/modals/RenameForm.vue';
 import ItemDisabled from '../components/modals/ItemDisabled.vue';
 import submitButton from '../components/templates/submitButton.vue';
+import resetButton from "../components/templates/resetButton";
 import editorInserter from '../components/includes/editor-inserter.vue';
 
 export default {
@@ -476,7 +491,8 @@ export default {
         submitButton,
         EditorSidebar,
         searchElement,
-        editorInserter
+        editorInserter,
+        resetButton
     },
     data() {
         return {
@@ -513,13 +529,15 @@ export default {
             editorInserterInContainer: false,
             instructionImage: FluentFormApp.plugin_public_url + 'img/help.png',
             has_payment_features: FluentFormApp.has_payment_features,
-            introVisible: false
+            introVisible: false,
+            showResetButton: false,
         }
     },
     computed: {
         ...mapGetters({
             fieldMode: 'fieldMode',
-            sidebarLoading: 'sidebarLoading'
+            sidebarLoading: 'sidebarLoading',
+            showSubmitButton : 'showSubmitButton'
         }),
 
         /**
@@ -581,6 +599,10 @@ export default {
          */
         submitButton() {
             return this.form.submitButton;
+        },
+
+        resetButton() {
+          return this.form.resetButton;
         },
 
         /**
@@ -666,7 +688,7 @@ export default {
     methods: {
         ...mapMutations({
             changeFieldMode: 'changeFieldMode',
-            updateSidebar: 'updateSidebar'
+            updateSidebar: 'updateSidebar',
         }),
 
         ...mapActions(['loadEditorShortcodes']),
@@ -867,6 +889,7 @@ export default {
                     let result = response.data.result[0];
                     if (result && result.value) {
                         let settings = result.value;
+                        this.showResetButton = settings.resetButton;
                         this.original_label_placement = settings.layout.labelPlacement;
                         if (settings.layout.labelPlacement == 'hide_label') {
                             settings.layout.labelPlacement = 'top';
@@ -1027,7 +1050,6 @@ export default {
     mounted() {
         this.fetchSettings();
         this.initiateMockLists();
-
         this.garbageCleaner();
         this.initSaveBtn();
         this.initRenameForm();

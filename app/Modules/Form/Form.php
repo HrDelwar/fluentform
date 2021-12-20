@@ -203,6 +203,7 @@ class Form
                 'cssClassName' => '',
                 'asteriskPlacement' => 'asterisk-right'
             ),
+            'resetButton' => false,
             'delete_entry_on_submission' => 'no'
         );
 

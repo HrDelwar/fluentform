@@ -13,11 +13,13 @@ export default new Vuex.Store({
     state: {
         fieldMode: 'add',
         sidebarLoading: true,
-        editorShortcodes: {}
+        editorShortcodes: {},
+        showSubmitButton: true
     },
     getters: {
         fieldMode: state => state.fieldMode,
         sidebarLoading: state => state.sidebarLoading,
+        showSubmitButton: state => state.showSubmitButton,
         editorShortcodes: state => state.editorShortcodes,
     },
     actions,
