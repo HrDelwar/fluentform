@@ -169,6 +169,13 @@ add_action('fluentform_loading_editor_assets', function ($form) {
         return $field;
     });
 
+    add_filter('fluentform_editor_init_element_location', function ($field) {
+        if (empty($field['settings']['label_placement'])) {
+            $field['settings']['label_placement'] = '';
+        }
+        return $field;
+    });
+
     $upgradableCheckInputs = [
         'input_radio',
         'select',

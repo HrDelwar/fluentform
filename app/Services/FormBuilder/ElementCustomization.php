@@ -316,6 +316,24 @@ $element_customization_settings = array(
         'template' => 'nameFields',
         'label' => __('Name Fields', 'fluentform'),
     ),
+    'location_fields' => array(
+        'template' => 'locationFields',
+        'label' => __('Location Fields', 'fluentform'),
+    ),
+    'auto_detect_label' => array(
+        'template' => 'inputText',
+        'label' => __('Auto Detect Label', 'fluentform'),
+        'help_text' => __('Auto Detect label is checkbox title which is use for automatic detect latitude and longitude.', 'fluentform'),
+    ),
+    'auto_detect' => array(
+        'template' => 'inputCheckbox',
+        'options' => array(
+            array(
+                'value' => true,
+                'label' => __('Auto Detect', 'fluentform'),
+            ),
+        )
+    ),
     'multi_column' => array(
         'template' => 'inputCheckbox',
         'options' => array(

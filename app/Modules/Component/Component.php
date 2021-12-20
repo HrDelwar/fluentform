@@ -642,6 +642,7 @@ class Component
             'Rating@compile'        => ['fluentform_render_item_ratings'],
             'Address@compile'       => ['fluentform_render_item_address'],
             'Name@compile'          => ['fluentform_render_item_input_name'],
+            'Location@compile' => ['fluentform_render_item_location'],
             'TextArea@compile'      => ['fluentform_render_item_textarea'],
             'DateTime@compile'      => ['fluentform_render_item_input_date'],
             'Recaptcha@compile'     => ['fluentform_render_item_recaptcha'],

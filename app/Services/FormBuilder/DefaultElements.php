@@ -942,6 +942,88 @@ $defaultElements = array(
                 'template' => 'customHTML',
             )
         ),
+        'location' => array(
+            'index' => 12,
+            'element' => 'location',
+            'attributes' => array(
+                'name' => 'location',
+                'data-type' => 'location-element'
+            ),
+            'settings' => array(
+                'container_class' => '',
+                'label' => __('Location', 'fluentform'),
+                'auto_detect_label' => __('Auto Detect', 'fluentform'),
+                'auto_detect' => true,
+                'admin_field_label' => 'Location',
+                'conditional_logics' => array(),
+                'label_placement' => 'top'
+            ),
+            'fields' => array(
+                'latitude' => array(
+                    'element' => 'latitude',
+                    'attributes' => array(
+                        'type' => 'text',
+                        'name' => 'latitude',
+                        'value' => '',
+                        'id' => '',
+                        'class' => '',
+                        'placeholder' => __('Latitude', 'fluentform'),
+                        'maxlength' => '',
+                    ),
+                    'settings' => array(
+                        'container_class' => '',
+                        'help_message' => '',
+                        'error_message' => '',
+                        'visible' => true,
+                        'validation_rules' => array(
+                            'required' => array(
+                                'value' => false,
+                                'message' => __('This field is required', 'fluentform'),
+                            ),
+                        ),
+                        'conditional_logics' => array(),
+                    ),
+                    'editor_options' => array(
+                        'template' => 'inputText'
+                    ),
+                ),
+                'longitude' => array(
+                    'element' => 'longitude',
+                    'attributes' => array(
+                        'type' => 'text',
+                        'name' => 'longitude',
+                        'value' => '',
+                        'id' => '',
+                        'class' => '',
+                        'placeholder' => __('Longitude', 'fluentform'),
+                        'required' => false,
+                        'maxlength' => '',
+                    ),
+                    'settings' => array(
+                        'container_class' => '',
+                        'help_message' => '',
+                        'error_message' => '',
+                        'visible' => true,
+                        'validation_rules' => array(
+                            'required' => array(
+                                'value' => false,
+                                'message' => __('This field is required', 'fluentform'),
+                            ),
+                        ),
+                        'conditional_logics' => array(),
+                    ),
+                    'editor_options' => array(
+                        'template' => 'inputText'
+                    ),
+                ),
+            ),
+            'editor_options' => array(
+                'title' => 'Location',
+                'element' => 'location-fields',
+                'icon_class' => 'ff-edit-address',
+                'template' => 'locationFields'
+            ),
+        ),
     ),
     'advanced' => array(
         'ratings' => array(

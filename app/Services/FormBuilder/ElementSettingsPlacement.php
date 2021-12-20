@@ -24,6 +24,19 @@ return array(
             'conditional_logics',
         ),
     ),
+    'location' => array(
+        'general' => array(
+            'label',
+            'admin_field_label',
+            'auto_detect_label',
+            'auto_detect',
+        ),
+        'advanced' => array(
+            'container_class',
+            'name',
+            'conditional_logics',
+        ),
+    ),
     'input_email' => array(
         'general' => array(
             'label',

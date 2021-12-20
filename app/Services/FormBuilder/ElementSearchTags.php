@@ -33,6 +33,11 @@ return array(
 		'last name',
 		'middle name',
 	),
+    'location'          => array(
+        'location',
+        'latitude',
+        'longitude',
+    ),
 	'textarea'            => array(
 		'text',
 		'textarea',
