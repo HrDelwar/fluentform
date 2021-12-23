@@ -219,7 +219,6 @@
                         });
                     }
                 });
-
                 this.editItem.settings.advanced_options = values;
                 this.bulkEditVisible = false
             },
