@@ -31,10 +31,16 @@
             <template v-if="settings.config_instruction && !integration.status">
                 <div class="integration_instraction" v-html="settings.config_instruction"></div>
             </template>
+            <el-row>
+              <el-col :md="6" v-for="(field, fieldKey) in settings.fields" :key="fieldKey" v-if="field.optional">
+                <el-switch v-model="requiredFields[fieldKey]"></el-switch>
+                <p>with {{field.label}}</p>
+              </el-col>
+            </el-row>
             <el-form label-width="205px" label-position="left">
                 <!--Site key-->
                 <el-form-item v-for="(field,fieldKey) in settings.fields" :key="fieldKey">
-                    <template slot="label">
+                    <template slot="label" v-if="requiredFields[fieldKey]">
                         {{ field.label }}
                         <el-tooltip v-if="field.label_tips" class="item" placement="bottom-start" effect="light">
                             <div slot="content">
@@ -45,7 +51,7 @@
                         </el-tooltip>
                     </template>
 
-                    <template v-if="field.type == 'select'">
+                    <template v-if="field.type == 'select' && requiredFields[fieldKey]">
                         <el-select v-model="integration[fieldKey]">
                             <el-option
                                 v-for="(optionName, optionValue) in field.options"
@@ -54,11 +60,11 @@
                                 :value="optionValue"></el-option>
                         </el-select>
                     </template>
-                    <template v-if="field.type == 'link'">
+                    <template v-if="field.type == 'link' && requiredFields[fieldKey] ">
                         <a :target="field.target" :class="field.btn_class" :href="field.link">{{ field.link_text }}</a>
                         <p>{{ field.tips }}</p>
                     </template>
-                    <template v-else>
+                    <template v-if="requiredFields[fieldKey]">
                         <el-input :placeholder="field.placeholder" :type="field.type"
                                   v-model="integration[fieldKey]"></el-input>
                         <p v-if="field.tips">{{ field.tips }}</p>
@@ -98,6 +104,7 @@ export default {
         return {
             integration: {},
             loading: false,
+            requiredFields:{},
             saving: false,
             settings: {},
             error_message: ''
@@ -150,9 +157,14 @@ export default {
                 .then(response => {
                     this.integration = response.data.integration;
                     this.settings = response.data.settings;
+                    let requiredFields = {}
+                    for (let fieldsKey in response?.data?.settings.fields) {
+                      requiredFields[fieldsKey] = response?.data?.settings.fields[fieldsKey]?.optional ? false : true;
+                    }
+                    this.requiredFields = requiredFields;
                 })
                 .fail(error => {
-                    this.error_message = error.responseJSON.data.message;
+                    this.error_message = error?.responseJSON?.data.message;
                 })
                 .always(() => {
                     this.loading = false;
