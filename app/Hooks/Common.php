@@ -272,6 +272,7 @@ $app->addAction('fluentform_submission_inserted', function ($insertId, $formData
 
 $app->addAction('init', function () use ($app) {
     new \FluentForm\App\Services\Integrations\MailChimp\MailChimpIntegration($app);
+    new \FluentForm\App\Services\Integrations\TeleSignSMS\Bootstrap($app);
 });
 
 $app->addAction('fluentform_form_element_start', function ($form) use ($app) {
