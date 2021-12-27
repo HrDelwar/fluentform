@@ -33,7 +33,7 @@
             </template>
             <el-row>
               <el-col :md="6" v-for="(field, fieldKey) in settings.fields" :key="fieldKey" v-if="field.optional">
-                <el-switch v-model="requiredFields[fieldKey]"></el-switch>
+                <el-switch @change="requiredFields[fieldKey] ? '' : integration[fieldKey] = ''" v-model="requiredFields[fieldKey]"></el-switch>
                 <p>with {{field.label}}</p>
               </el-col>
             </el-row>
@@ -159,7 +159,7 @@ export default {
                     this.settings = response.data.settings;
                     let requiredFields = {}
                     for (let fieldsKey in response?.data?.settings.fields) {
-                      requiredFields[fieldsKey] = response?.data?.settings.fields[fieldsKey]?.optional ? false : true;
+                      requiredFields[fieldsKey] = response?.data?.settings.fields[fieldsKey]?.optional ? (response?.data?.integration[fieldsKey] ? true : false) : true;
                     }
                     this.requiredFields = requiredFields;
                 })
