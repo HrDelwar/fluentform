@@ -75,15 +75,104 @@
                     </div>
                 </td>
             </tr>
-            <tr v-for="(field_name, field_index) in merge_fields">
+            <tr v-for="(field, field_index) in merge_fields" :key="field.key || field">
                 <td class="el-form-item">
-                    <label class="el-form-item__label">{{ field_name }}</label>
+
+                    <label class="el-form-item__label">
+                      <template >
+                        {{field.label || field}}
+                        <el-tooltip
+                            v-if="field.tips"
+                            class="item"
+                            effect="light"
+                            placement="bottom-start"
+                        >
+                          <div slot="content">
+                            <p v-html="field.tips"></p>
+                          </div>
+                          <i class="el-icon-info el-text-info"></i>
+                        </el-tooltip>
+                      </template>
+                    </label>
                 </td>
                 <td>
+                  <template v-if="field.component == 'select'">
+                    <el-select
+                        filterable
+                        clearable
+                        :multiple="field.is_multiple"
+                        v-model="settings[field.key]"
+                        :placeholder="field.placeholder">
+                      <el-option
+                          v-for="(list_name, list_key) in field.options"
+                          :key="list_key"
+                          :value="list_key"
+                          :label="list_name"
+                      ></el-option>
+                    </el-select>
+                    <error-view :field="field.key" :errors="errors"></error-view>
+                  </template>
+
+
+                  <template v-else-if="field.component == 'value_text'">
+                    <field-general
+                        :editorShortcodes="editorShortcodes"
+                        v-model="settings[field.key]"
+                    ></field-general>
+                    <p v-if="field.inline_tip" v-html="field.inline_tip"></p>
+                  </template>
+
+                  <template v-else-if="field.component == 'value_textarea'">
+                    <field-general
+                        field_type="textarea"
+                        :editorShortcodes="editorShortcodes"
+                        v-model="settings[field.key]"
+                    ></field-general>
+                    <p v-if="field.inline_tip" v-html="field.inline_tip"></p>
+                  </template>
+
+
+                  <template v-else-if="field.component == 'datetime'">
+                    <el-date-picker
+                        v-model="settings[field.key]"
+                        type="datetime"
+                        format="yyyy/MM/dd HH:mm:ss"
+                        :placeholder="field.placeholder"
+                    >
+                    </el-date-picker>
+                    <p v-if="field.inline_tip" v-html="field.inline_tip"></p>
+                  </template>
+
+                  <template v-else-if="field.component == 'dropdown_many_fields'">
+                    <drop-down-many-fields
+                        :errors="errors"
+                        :inputs="inputs"
+                        :field="field"
+                        :settings="settings"
+                        :editorShortcodes="editorShortcodes"
+                    />
+                  </template>
+
+                  <template v-else-if="field.component == 'chained_select'">
+                    <chained-selects
+                        v-if="has_pro"
+                        :settings="settings"
+                        v-model="settings[field.key]"
+                        :field="field"
+                    ></chained-selects>
+                    <p style="color: red;" v-else>
+                      This field only available on pro version.
+                      Please install Fluent Forms Pro.
+                    </p>
+                  </template>
+
+                  <template v-else>
                     <field-general
                         :editorShortcodes="editorShortcodes"
                         v-model="merge_model[field_index]"
                     ></field-general>
+                  </template>
+
                 </td>
             </tr>
             </tbody>
@@ -94,14 +183,19 @@
 <script type="text/babel">
     import ErrorView from '../../../../common/errorView';
     import FieldGeneral from './_FieldGeneral'
+    import ChainedSelects from "./_ChainedSelects";
+    import DropDownManyFields from "./_DropdownManyFields";
+
 
     export default {
         name: 'field_maps',
         components: {
+          DropDownManyFields,
             ErrorView,
-            FieldGeneral
+            FieldGeneral,
+            ChainedSelects,
         },
-        props: ['settings', 'merge_fields', 'field', 'inputs', 'errors', 'merge_model', 'editorShortcodes'],
+        props: ['settings', 'merge_fields', 'field', 'inputs', 'errors', 'merge_model', 'editorShortcodes','has_pro'],
         data() {
             return {
                 appReady: false
