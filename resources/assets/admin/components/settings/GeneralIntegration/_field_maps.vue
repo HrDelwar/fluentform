@@ -137,6 +137,7 @@
                         v-model="settings[field.key]"
                         type="datetime"
                         format="yyyy/MM/dd HH:mm:ss"
+                        v-on:change="handleChange($event, field.key)"
                         :placeholder="field.placeholder"
                     >
                     </el-date-picker>
@@ -201,6 +202,13 @@
                 appReady: false
             }
         },
+        methods:{
+          handleChange : function (value,key){
+            let date = value.toString().replace(value.toString().match(/\(([A-Za-z\s].*)\)/)[0],'').trim();
+            this.settings[key] = date;
+          }
+        },
+
         mounted() {
             if (Array.isArray(this.merge_model) || !this.merge_model) {
                 this.merge_model = {};
