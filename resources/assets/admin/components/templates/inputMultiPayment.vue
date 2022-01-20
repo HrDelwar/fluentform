@@ -33,7 +33,7 @@
 import withLabel from './withLabel.vue';
 
 export default {
-    name: 'inputCheckable',
+    name: 'inputMultiPayment',
     props: ['item'],
     components: {
         withLabel

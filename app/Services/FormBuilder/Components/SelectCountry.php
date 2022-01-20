@@ -65,7 +65,7 @@ class SelectCountry extends BaseComponent
      * @param array $data
      * @return array
      */
-    protected function loadCountries($data)
+    public function loadCountries($data)
     {
         $app = App::make();
         $data['options'] = array();
@@ -115,7 +115,7 @@ class SelectCountry extends BaseComponent
         return $opts;
     }
 
-    protected function getSelectedCountries($keys = [])
+    public function getSelectedCountries($keys = [])
     {
         $app = App::make();
         $options = [];

@@ -8,6 +8,11 @@ if (!mix.inProduction()) {
     mix.webpackConfig({
         devtool: 'source-map'
     }).sourceMaps(false);
+} else {
+    // During production build we'll remove the existing public
+    // directory so that the source-maps are deleted as well.
+    let fs = require('fs-extra');
+    fs.remove('public');
 }
 
 mix.webpackConfig({

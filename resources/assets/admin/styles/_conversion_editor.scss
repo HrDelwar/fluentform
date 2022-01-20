@@ -1,4 +1,5 @@
 $editorBg: #fafafa;
+
 .ff_conv_section_wrapper {
   display: flex;
   flex-direction: row;
@@ -10,19 +11,22 @@ $editorBg: #fafafa;
 
   &.ff_conv_layout_default {
     padding: 10px 0;
+
     .ff_conv_media_preview {
       display: none !important;
     }
 
     .ff_conv_input {
-      padding-left: 30px;
+      padding-left: 10px;
+      padding-right: 10px;
       width: 100%;
     }
   }
 
   .ff_conv_input {
     width: 100%;
-    padding: 0 20px 0 30px;
+    padding: 0 20px 0 10px;
+    justify-content: center;
 
     label.el-form-item__label {
       font-size: 18px;
@@ -43,7 +47,7 @@ $editorBg: #fafafa;
 
     img {
       max-width: 100%;
-      max-height: 300px;
+      // max-height: 300px;
     }
   }
 
@@ -62,13 +66,24 @@ $editorBg: #fafafa;
 
     .ff_conv_input {
       width: 100%;
-      padding: 30px 0 30px 30px;
+      // padding: 30px 0 30px 30px;
+      padding: 0 10px 0 20px;
     }
   }
 
   &.ff_conv_layout_media_right_full {
+    align-items: initial;
+
     .ff_conv_media_preview {
       margin: -10px -10px -10px 0px;
+
+      .fc_i_layout_media_right_full {
+        height: 100%;
+
+        .fc_image_holder {
+          height: 100%;
+        }
+      }
     }
 
     img {
@@ -84,15 +99,24 @@ $editorBg: #fafafa;
   }
 
   &.ff_conv_layout_media_left_full {
+    align-items: initial;
     flex-direction: row-reverse;
 
     .ff_conv_media_preview {
       margin: -10px 0px -10px -10px;
+
+      .fc_i_layout_media_left_full {
+        height: 100%;
+
+        .fc_image_holder {
+          height: 100%;
+        }
+      }
     }
 
     .ff_conv_input {
       width: 100%;
-      padding: 30px 0 30px 30px;
+      padding: 0 10px 0 20px;
     }
 
     img {
@@ -136,7 +160,7 @@ $editorBg: #fafafa;
 }
 
 .ff_iconed_radios {
-  > label {
+  >label {
     border: 1px solid rgb(115, 115, 115);
     padding: 5px 10px;
     color: rgb(115, 115, 115);
@@ -171,7 +195,9 @@ $editorBg: #fafafa;
 .ff_conversion_editor {
   background: $editorBg;
 
-  .form-editor--body, .form-editor__body-content, .panel__body--list {
+  .form-editor--body,
+  .form-editor__body-content,
+  .panel__body--list {
     background-color: $editorBg !important;
   }
 
@@ -209,6 +235,7 @@ $editorBg: #fafafa;
     padding: 15px;
     text-align: center;
     font-size: 13px;
+
     a {
       display: block;
       margin-top: 10px;

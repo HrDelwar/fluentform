@@ -34,7 +34,6 @@ class Form
 
         // elements
         new WelcomeScreen();
-
     }
 
     public function pushDesignTab($menuItems, $formId)
@@ -208,7 +207,7 @@ class Form
             }
         }
 
-        return $prefix . ' { background-color: #FFFFFF; } ' . $prefix . ' .ffc-counter-div span { color: #0445AF; } ' . $prefix . ' .ffc-counter-div .counter-icon-span svg { fill: #0445AF !important; } ' . $prefix . ' .f-label-wrap,  ' . $prefix . ' .f-answer { color: #0445AF !important; } ' . $prefix . ' .f-label-wrap .f-key { border-color: #0445AF !important; } ' . $prefix . ' .f-answer .f-radios-wrap ul li { background-color: rgba(4,69,175, 0.1) !important; } ' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected { background-color: rgba(4,69,175, 0.3) !important; } ' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected .f-key { background-color: #0445AF !important; color: white; } ' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected svg { fill: #0445AF !important; } ' . $prefix . ' .f-answer input,  ' . $prefix . ' .f-answer textarea{ color: #0445AF !important; box-shadow: #0445AF  0px 1px; } ' . $prefix . ' .f-answer input:focus,  ' . $prefix . ' .f-answer textarea:focus { box-shadow: #0445AF  0px 2px !important; } ' . $prefix . ' .f-answer textarea::placeholder,  ' . $prefix . ' .f-answer input::placeholder { color: #0445AF !important; } ' . $prefix . ' .text-success { color: #0445AF !important; } ' . $prefix . ' .fh2 .f-text { color: #191919; } ' . $prefix . ' .fh2 .f-tagline,  ' . $prefix . ' .f-sub .f-help { color: rgba(25,25,25, 0.70); } ' . $prefix . ' .q-inner .o-btn-action,  ' . $prefix . ' .footer-inner-wrap .f-nav { background-color: #0445AF; } ' . $prefix . ' .q-inner .o-btn-action span,  ' . $prefix . ' .footer-inner-wrap .f-nav a { color: #FFFFFF; }  ' . $prefix . ' .f-enter .f-enter-desc { color: #0445AF; } ' . $prefix . ' .footer-inner-wrap .f-nav a svg { fill: #FFFFFF; } ' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected .f-key { color: #FFFFFF; }';
+        return $prefix . ' { background-color: #FFFFFF; }' . $prefix . ' .ffc-counter-div span { color: #0445AF; }' . $prefix . ' .ffc-counter-div .counter-icon-span svg { fill: #0445AF !important; }' . $prefix . ' .f-label-wrap, ' . $prefix . ' .f-answer { color: #0445AF !important; }' . $prefix . ' .f-label-wrap .f-key { border-color: #0445AF !important; }' . $prefix . ' .f-label-wrap .f-key-hint { border-color: #0445AF !important; }' . $prefix . ' .f-answer .f-radios-wrap ul li { background-color: rgba(4,69,175, 0.1) !important; border: 1px solid #0445AF; }' . $prefix . ' .f-answer .f-radios-wrap ul li:focus { background-color: rgba(4,69,175, 0.3) !important }' . $prefix . ' .f-answer .f-radios-wrap ul li:hover { background-color: rgba(4,69,175, 0.3) !important }' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected .f-key { background-color: #0445AF !important; color: white; }' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected .f-key-hint { background-color: #0445AF; }' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected svg { fill: #0445AF !important; }' . $prefix . ' .f-answer input, ' . $prefix . ' .f-answer textarea{ color: #0445AF !important; box-shadow: #0445AF  0px 1px; }' . $prefix . ' .f-answer input:focus, ' . $prefix . ' .f-answer textarea:focus { box-shadow: #0445AF  0px 2px !important; }' . $prefix . ' .f-answer textarea::placeholder, ' . $prefix . ' .f-answer input::placeholder { color: #0445AF !important; }' . $prefix . ' .text-success { color: #0445AF !important; }' . $prefix . ' .f-answer .f-matrix-table tbody td { background-color: rgba(4,69,175, 0.1); }' . $prefix . ' .f-answer .f-matrix-table input { border-color: rgba(4,69,175, 0.8); }' . $prefix . ' .f-answer .f-matrix-table input.f-radio-control:checked::after { background-color: #0445AF; }' . $prefix . ' .f-answer .f-matrix-table input:focus::before { border-color: #0445AF; }' . $prefix . ' .f-answer .f-matrix-table input.f-checkbox-control:checked { background-color: #0445AF; }' . $prefix . ' .f-answer .f-matrix-table tbody tr::after { border-right-color: #0445AF; }' . $prefix . ' .f-answer .f-matrix-table .f-table-cell.f-row-cell { box-shadow: rgba(4,69,175, 0.1) 0px 0px 0px 100vh inset; }' . $prefix . ' .f-answer .ff_file_upload_field_wrap { background-color: rgba(4,69,175, 0.1); border-color: rgba(4,69,175, 0.8); }' . $prefix . ' .f-answer .ff_file_upload_field_wrap:hover { background-color: rgba(4,69,175, 0.3);}' . $prefix . ' .f-answer .ff_file_upload_field_wrap:focus-within { background-color: rgba(4,69,175, 0.3); }' . $prefix . ' .f-answer .ff-upload-preview { border-color: rgba(4,69,175, 0.8); }' . $prefix . ' .f-answer .ff-upload-preview .ff-upload-thumb { background-color: rgba(4,69,175, 0.3); }' . $prefix . ' .f-answer .ff-upload-preview .ff-upload-details { border-left-color: rgba(4,69,175, 0.8); }' . $prefix . ' .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress { border-left-color: rgba(4,69,175, 0.8); }' . $prefix . ' .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress { background-color: rgba(4,69,175, 0.1); }' . $prefix . ' .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress .ff-el-progress-bar { background-color: #0445AF; }' . $prefix . ' .f-answer .f-star-wrap .f-star-field-wrap::before { background-color: #0445AF; }' . $prefix . ' .f-answer .f-star-wrap .f-star-field-wrap .f-star-field .f-star-field-star .symbolOutline { fill: #0445AF; }' . $prefix . ' .f-answer .f-star-wrap .f-star-field-wrap .f-star-field .f-star-field-rating { color: #0445AF; }' . $prefix . ' .f-answer .f-star-wrap .f-star-field-wrap.is-hovered .symbolFill { fill: rgba(4,69,175, 0.1); }' . $prefix . ' .f-answer .f-star-wrap .f-star-field-wrap.is-selected .symbolFill { fill: #0445AF; }' . $prefix . ' .f-answer .f-payment-summary-wrap tbody td { background-color: rgba(4,69,175, 0.1); }' . $prefix . ' .f-answer .f-payment-summary-wrap tfoot th { background-color: rgba(4,69,175, 0.1); }' . $prefix . ' .f-answer .stripe-inline-holder { border-bottom: 1px solid #0445AF; }' . $prefix . ' .f-answer .StripeElement--focus { border-bottom: 2.5px solid #0445AF; }' . $prefix . ' .ff_conv_input .f-info { color: #0445AF; }' . $prefix . ' .fh2 .f-text { color: #191919; }' . $prefix . ' .fh2 .f-tagline, ' . $prefix . ' .f-sub .f-help { color: rgba(25,25,25, 0.70); }' . $prefix . ' .fh2 .stripe-inline-header { color: #191919; }' . $prefix . ' .q-inner .o-btn-action, ' . $prefix . ' .footer-inner-wrap .f-nav { background-color: #0445AF; }' . $prefix . ' .q-inner .o-btn-action span, ' . $prefix . ' .footer-inner-wrap .f-nav a { color: #FFFFFF; } ' . $prefix . ' .f-enter .f-enter-desc { color: #0445AF; }' . $prefix . ' .footer-inner-wrap .f-nav a svg { fill: #FFFFFF; }' . $prefix . ' .vff-footer .f-progress-bar { background-color: rgba(4,69,175, 0.3); }' . $prefix . ' .vff-footer .f-progress-bar-inner { background-color: #0445AF; }' . $prefix . ' .q-inner .o-btn-action:hover { background-color: #0445AFD6; }' . $prefix . ' .q-inner .o-btn-action:focus::after { border-radius: 6px; inset: -3px; box-shadow: #0445AF 0px 0px 0px 2px; }' . $prefix . ' .f-answer .f-radios-wrap ul li.f-selected .f-key { color: #FFFFFF; }';
     }
 
     public function render()
@@ -219,8 +218,8 @@ class Form
         }
 
         if ((isset($_GET[$paramKey])) && !wp_doing_ajax()) {
-            $formId = intval(ArrayHelper::get($_REQUEST, $paramKey));
-            $shareKey = ArrayHelper::get($_REQUEST, 'form');
+            $formId = intval(ArrayHelper::get($_GET, $paramKey));
+            $shareKey = ArrayHelper::get($_GET, 'form');
             $this->renderFormHtml($formId, $shareKey);
         }
     }
@@ -295,6 +294,7 @@ class Form
 
         $generalFields = ArrayHelper::get($components, 'general', []);
         $advancedFields = ArrayHelper::get($components, 'advanced', []);
+        $paymentFields = ArrayHelper::get($components, 'payments', []);
 
         $acceptedFieldElements = [
             'phone',
@@ -305,21 +305,31 @@ class Form
             'input_url',
             'input_text',
             'input_date',
+            'input_file',
             'input_email',
             'input_radio',
             'custom_html',
+            'input_image',
             'input_hidden',
             'input_number',
+            'tabular_grid',
             'section_break',
             'select_country',
             'input_checkbox',
             'input_password',
             'terms_and_condition',
+            'multi_payment_component',
+            'subscription_payment_component',
+            'custom_payment_component',
+            'item_quantity_component',
+            'payment_method',
+            'payment_summary_component',
+            'payment_coupon'
         ];
 
         $elements = [];
 
-        $allFields = array_merge($generalFields, $advancedFields);
+        $allFields = array_merge($generalFields, $advancedFields, $paymentFields);
 
         foreach ($allFields as $field) {
             $element = $field['element'];
@@ -500,7 +510,10 @@ class Form
             'form_id'                  => $form->id,
             'is_inline_form'           => true,
             'design'                   => $designSettings,
-            'extra_inputs'             => $this->getExtraHiddenInputs($formId)
+            'extra_inputs'             => $this->getExtraHiddenInputs($formId),
+            'uploading_txt'            => __('Uploading', 'fluentform'),
+            'upload_completed_txt'     => __('100% Completed', 'fluentform'),
+            'paymentConfig'            => $this->getPaymentConfig($form)
         ]);
 
         if (!apply_filters('fluentform-disabled_analytics', false)) {
@@ -619,13 +632,17 @@ class Form
                 'id'             => $form->id,
                 'questions'      => $form->questions,
                 'image_preloads' => $form->image_preloads,
-                'submit_button'  => $form->submit_button
+                'submit_button'  => $form->submit_button,
+                'hasPayment'     => !!$form->has_payment,
             ],
             'form_id'                  => $form->id,
             'assetBaseUrl'             => FLUENT_CONVERSATIONAL_FORM_DIR_URL . 'public',
             'i18n'                     => $metaSettings['i18n'],
             'design'                   => $designSettings,
-            'extra_inputs'             => $this->getExtraHiddenInputs($formId)
+            'extra_inputs'             => $this->getExtraHiddenInputs($formId),
+            'uploading_txt'            => __('Uploading', 'fluentform'),
+            'upload_completed_txt'     => __('100% Completed', 'fluentform'),
+            'paymentConfig'            => $this->getPaymentConfig($form)
         ]);
 
         $this->printLoadedScripts();
@@ -689,5 +706,52 @@ class Form
             FLUENTFORM_VERSION,
             true
         );
+    }
+
+    /**
+     * Get the payment configuration of this form.
+     *
+     * @param $form
+     */
+    private function getPaymentConfig($form)
+    {
+        $paymentConfig = null;
+
+        if ($form->has_payment && defined('FLUENTFORMPRO')) {
+            $publishableKey = apply_filters(
+                'fluentform-payment_stripe_publishable_key',
+                \FluentFormPro\Payments\PaymentMethods\Stripe\StripeSettings::getPublishableKey($form->id),
+                $form->id
+            );
+
+            $paymentConfig = [
+                'currency_settings' => \FluentFormPro\Payments\PaymentHelper::getCurrencyConfig($form->id),
+                'stripe'            => [
+                    'publishable_key' => $publishableKey,
+                    'inlineConfig'    => \FluentFormPro\Payments\PaymentHelper::getStripeInlineConfig($form->id)
+                ],
+                'stripe_app_info'   => array(
+                    'name'       => 'Fluent Forms',
+                    'version'    => FLUENTFORMPRO_VERSION,
+                    'url'        => site_url(),
+                    'partner_id' => 'pp_partner_FN62GfRLM2Kx5d'
+                ),
+                'i18n'              => [
+                    'item'            => __('Item', 'fluentformpro'),
+                    'price'           => __('Price', 'fluentformpro'),
+                    'qty'             => __('Qty', 'fluentformpro'),
+                    'line_total'      => __('Line Total', 'fluentformpro'),
+                    'total'           => __('Total', 'fluentformpro'),
+                    'not_found'       => __('No payment item selected yet', 'fluentformpro'),
+                    'discount:'       => __('Discount:', 'fluentformpro'),
+                    'processing_text' => __('Processing payment. Please wait...', 'fluentformpro'),
+                    'confirming_text' => __('Confirming payment. Please wait...', 'fluentformpro')
+                ]
+            ];
+
+            $paymentConfig['currency_settings']['currency_symbol'] = \html_entity_decode($paymentConfig['currency_settings']['currency_sign']);
+        }
+
+        return $paymentConfig;
     }
 }

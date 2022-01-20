@@ -74,7 +74,7 @@ class FormDataParser
         return $value;
     }
 
-    public static function formatFileValues($values, $isHtml)
+    public static function formatFileValues($values, $isHtml, $form_id = null)
     {
         if (!$values) {
             return $values;
@@ -86,6 +86,9 @@ class FormDataParser
 
         if (!$isHtml) {
             return fluentImplodeRecursive(', ', array_filter(array_values((array)$values)));
+        }
+        if ($form_id && \FluentForm\App\Helpers\Helper::isEntryAutoDeleteEnabled($form_id)) {
+            return '';
         }
 
         $html = '<ul class="ff_entry_list">';
@@ -100,7 +103,7 @@ class FormDataParser
         return $html;
     }
 
-    public static function formatImageValues($values, $isHtml)
+    public static function formatImageValues($values, $isHtml, $form_id = null)
     {
         if (!$values) {
             return $values;
@@ -113,7 +116,9 @@ class FormDataParser
         if (!$isHtml) {
             return fluentImplodeRecursive(', ', array_filter(array_values((array)$values)));
         }
-
+        if ($form_id && \FluentForm\App\Helpers\Helper::isEntryAutoDeleteEnabled($form_id)) {
+            return '';
+        }
         if (count($values) == 1) {
             $value = $values[0];
             if (!$value) {

@@ -96,19 +96,55 @@ export default {
                 css += `${prefix} .ffc-counter-div .counter-icon-span svg { fill: ${settings.answer_color} !important; }`;
                 css += `${prefix} .f-label-wrap, ${prefix} .f-answer { color: ${settings.answer_color} !important; }`;
                 css += `${prefix} .f-label-wrap .f-key { border-color: ${settings.answer_color} !important; }`;
-                css += `${prefix} .f-answer .f-radios-wrap ul li { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')} !important; }`;
-                css += `${prefix} .f-answer .f-radios-wrap ul li.f-selected { background-color: ${this.hexToRGBA(settings.answer_color, '0.3')} !important; }`;
+                css += `${prefix} .f-label-wrap .f-key-hint { border-color: ${settings.answer_color} !important; }`;
+                css += `${prefix} .f-answer .f-radios-wrap ul li { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')} !important; border: 1px solid ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-radios-wrap ul li:focus { background-color: ${this.hexToRGBA(settings.answer_color, .3)} !important }`;
+                css += `${prefix} .f-answer .f-radios-wrap ul li:hover { background-color: ${this.hexToRGBA(settings.answer_color, .3)} !important }`;
                 css += `${prefix} .f-answer .f-radios-wrap ul li.f-selected .f-key { background-color: ${settings.answer_color} !important; color: white; }`;
+                css += `${prefix} .f-answer .f-radios-wrap ul li.f-selected .f-key-hint { background-color: ${settings.answer_color}; }`;
                 css += `${prefix} .f-answer .f-radios-wrap ul li.f-selected svg { fill: ${settings.answer_color} !important; }`;
                 css += `${prefix} .f-answer input, ${prefix} .f-answer textarea{ color: ${settings.answer_color} !important; box-shadow: ${settings.answer_color}  0px 1px; }`;
                 css += `${prefix} .f-answer input:focus, ${prefix} .f-answer textarea:focus { box-shadow: ${settings.answer_color}  0px 2px !important; }`;
                 css += `${prefix} .f-answer textarea::placeholder, ${prefix} .f-answer input::placeholder { color: ${settings.answer_color} !important; }`;
                 css += `${prefix} .text-success { color: ${settings.answer_color} !important; }`;
+
+                css += `${prefix} .f-answer .f-matrix-table tbody td { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')}; }`;
+                css += `${prefix} .f-answer .f-matrix-table input { border-color: ${this.hexToRGBA(settings.answer_color, '0.8')}; }`;
+                css += `${prefix} .f-answer .f-matrix-table input.f-radio-control:checked::after { background-color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-matrix-table input:focus::before { border-color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-matrix-table input.f-checkbox-control:checked { background-color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-matrix-table tbody tr::after { border-right-color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-matrix-table .f-table-cell.f-row-cell { box-shadow: ${this.hexToRGBA(settings.answer_color, '0.1')} 0px 0px 0px 100vh inset; }`;
+                
+                css += `${prefix} .f-answer .ff_file_upload_field_wrap { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')}; border-color: ${this.hexToRGBA(settings.answer_color, '0.8')}; }`;
+                css += `${prefix} .f-answer .ff_file_upload_field_wrap:hover { background-color: ${this.hexToRGBA(settings.answer_color, '0.3')};}`;
+                css += `${prefix} .f-answer .ff_file_upload_field_wrap:focus-within { background-color: ${this.hexToRGBA(settings.answer_color, '0.3')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview { border-color: ${this.hexToRGBA(settings.answer_color, '0.8')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview .ff-upload-thumb { background-color: ${this.hexToRGBA(settings.answer_color, '0.3')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview .ff-upload-details { border-left-color: ${this.hexToRGBA(settings.answer_color, '0.8')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress { border-left-color: ${this.hexToRGBA(settings.answer_color, '0.8')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')}; }`;
+                css += `${prefix} .f-answer .ff-upload-preview .ff-upload-details .ff-el-progress .ff-el-progress-bar { background-color: ${settings.answer_color}; }`;
+
+                css += `${prefix} .f-answer .f-star-wrap .f-star-field-wrap::before { background-color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-star-wrap .f-star-field-wrap .f-star-field .f-star-field-star .symbolOutline { fill: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-star-wrap .f-star-field-wrap .f-star-field .f-star-field-rating { color: ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .f-star-wrap .f-star-field-wrap.is-hovered .symbolFill { fill: ${this.hexToRGBA(settings.answer_color, '0.1')}; }`;
+                css += `${prefix} .f-answer .f-star-wrap .f-star-field-wrap.is-selected .symbolFill { fill: ${settings.answer_color}; }`;
+
+                css += `${prefix} .f-answer .f-payment-summary-wrap tbody td { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')}; }`;
+                css += `${prefix} .f-answer .f-payment-summary-wrap tfoot th { background-color: ${this.hexToRGBA(settings.answer_color, '0.1')}; }`;
+                
+                css += `${prefix} .f-answer .stripe-inline-holder { border-bottom: 1px solid ${settings.answer_color}; }`;
+                css += `${prefix} .f-answer .StripeElement--focus { border-bottom: 2.5px solid ${settings.answer_color}; }`;
+
+                css += `${prefix} .ff_conv_input .f-info { color: ${settings.answer_color}; }`;
             }
 
             if (settings.question_color) {
                 css += `${prefix} .fh2 .f-text { color: ${settings.question_color}; }`
                 css += `${prefix} .fh2 .f-tagline, ${prefix} .f-sub .f-help { color: ${this.hexToRGBA(settings.question_color, '0.70')}; }`
+                css += `${prefix} .fh2 .stripe-inline-header { color: ${settings.question_color}; }`
             }
 
             if (settings.button_color) {
@@ -116,6 +152,10 @@ export default {
                 css += `${prefix} .q-inner .o-btn-action span, ${prefix} .footer-inner-wrap .f-nav a { color: ${settings.button_text_color}; }`;
                 css += ` ${prefix} .f-enter .f-enter-desc { color: ${settings.button_color}; }`;
                 css += `${prefix} .footer-inner-wrap .f-nav a svg { fill: ${settings.button_text_color}; }`;
+                css += `${prefix} .vff-footer .f-progress-bar { background-color: ${this.hexToRGBA(settings.button_color, .3)}; }`;
+                css += `${prefix} .vff-footer .f-progress-bar-inner { background-color: ${settings.button_color}; }`;
+                css += `${prefix} .q-inner .o-btn-action:hover { background-color: ${settings.button_color + 'D6'}; }`;
+                css += `${prefix} .q-inner .o-btn-action:focus::after { border-radius: 6px; inset: -3px; box-shadow: ${settings.button_color} 0px 0px 0px 2px; }`;
             }
 
             if (settings.background_image) {

@@ -59,7 +59,7 @@
                   <span class="el-dropdown-link">
                     {{ current_form_title }}
                   </span>
-                    <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-menu slot="dropdown" style="max-height:300px; overflow-y:scroll;">
                         <el-dropdown-item
                                 v-for="form in forms"
                                 :key="'form_switch_'+form.id"
@@ -82,7 +82,7 @@
                   <span class="el-dropdown-link">
                         {{$t('Columns')}}
                   </span>
-                    <el-dropdown-menu slot="dropdown" >
+                    <el-dropdown-menu slot="dropdown" style="max-height:300px; overflow-y:scroll;" >
 
                         <el-dropdown-item
                                 v-for="(column, column_name) in columns"

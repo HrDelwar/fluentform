@@ -144,12 +144,12 @@ $app->addFilter('fluentform_response_render_textarea', function ($value, $field,
 }, 10, 4);
 
 $app->addFilter('fluentform_response_render_input_file', function ($response, $field, $form_id, $isHtml = false) {
-    return \FluentForm\App\Modules\Form\FormDataParser::formatFileValues($response, $isHtml);
+    return \FluentForm\App\Modules\Form\FormDataParser::formatFileValues($response, $isHtml, $form_id);
 }, 10, 4);
 
 
 $app->addFilter('fluentform_response_render_input_image', function ($response, $field, $form_id, $isHtml = false) {
-    return \FluentForm\App\Modules\Form\FormDataParser::formatImageValues($response, $isHtml);
+    return \FluentForm\App\Modules\Form\FormDataParser::formatImageValues($response, $isHtml, $form_id);
 }, 10, 4);
 
 $app->addFilter('fluentform_response_render_input_repeat', function ($response, $field, $form_id) {
@@ -428,8 +428,8 @@ if (function_exists('register_block_type')) {
                     }
                 }
             }
-
-            return do_shortcode('[fluentform css_classes="' . $className . ' ff_guten_block" id="' . $atts['formId'] . '"]');
+            $type= \FluentForm\App\Helpers\Helper::isConversionForm($atts['formId']) ? 'conversational' : '';
+            return do_shortcode('[fluentform css_classes="' . $className . ' ff_guten_block" id="' . $atts['formId'] . '"  type="' .$type .'"]');
         },
         'attributes'      => array(
             'formId'    => array(

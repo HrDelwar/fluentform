@@ -60,9 +60,9 @@
                             <el-tooltip class="item" placement="bottom-start" effect="light">
                                 <div slot="content">
                                     <p>
-                                        Select The primary Email field from form fields.<br/>
-                                        In the selected email field, The double-optin email will be sent for
-                                        verification
+                                        Select the primary email field from the form fields.<br/>
+                                        In the selected email field, the double optin email will be sent for
+                                        verification.
                                     </p>
                                 </div>
 
@@ -223,7 +223,7 @@
                                     <p>
                                         Select the default help message placement. <br>
                                         Help messages can be placed beside <br>
-                                        label as a tooltip, or bellow each input.
+                                        label as a tooltip, or below each input.
                                     </p>
                                 </div>
 
@@ -248,7 +248,7 @@
 
                                     <p>
                                         Select the default error message placement. <br>
-                                        Error messages can be placed bellow each input, <br>
+                                        Error messages can be placed below each input, <br>
                                         or stacked after the form submit button.
                                     </p>
                                 </div>
@@ -273,7 +273,7 @@
                                     <h3>Required Asterisk Position</h3>
 
                                     <p>
-                                        The asterisk marker position for the required elements
+                                        The asterisk marker position for the required elements.
                                     </p>
                                 </div>
 
@@ -315,9 +315,9 @@
                     <el-col :md="24">
                         <h2>Advanced Form Validation</h2>
                         <p>
-                            You can set rules to the user input and based on the rules you can prevent the form submit.
+                            You can set rules to the user input and based on the rules you can prevent the form submission.
                             This is very useful feature for preventing spam/bot submissions. <a target="_blank"
-                                                                                                rel="noopener" href="#">Learn
+                                                                                                rel="noopener" href="https://wpmanageninja.com/docs/fluent-form/advanced-features-functionalities-in-wp-fluent-form/advanced-form-validation-in-wp-fluent-forms-wordpress-plugin/">Learn
                             More here</a>
                         </p>
                     </el-col>
@@ -358,9 +358,8 @@
                                     <h3>Delete entry on form submission</h3>
 
                                     <p>
-                                        if you enable this settings then your entry data will be deleted from database.
-                                        It's
-                                        useful for HIPPA/GDPR Compliance for some forms
+                                        If you enable this settings then your entry data will be deleted from database.<br>
+                                        It's useful for HIPPA/GDPR Compliance for some forms.
                                     </p>
                                 </div>
 

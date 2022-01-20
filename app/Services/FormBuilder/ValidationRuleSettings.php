@@ -70,6 +70,40 @@ $validation_rule_settings = array(
                     ),
                 ),
         ),
+    'email' =>
+        array(
+            'template' => 'inputRadio',
+            'label' => __('Validate Email', 'fluentform'),
+            'help_text' => __('Select whether to validate this field as email or not', 'fluentform'),
+            'options' =>
+                array(
+                    array(
+                        'value' => true,
+                        'label' => __('Yes', 'fluentform'),
+                    ),
+                    array(
+                        'value' => false,
+                        'label' => __('No', 'fluentform'),
+                    ),
+                ),
+        ),
+    'url' =>
+        array(
+            'template' => 'inputRadio',
+            'label' => __('Validate URL', 'fluentform'),
+            'help_text' => __('Select whether to validate this field as URL or not', 'fluentform'),
+            'options' =>
+                array(
+                    array(
+                        'value' => true,
+                        'label' => __('Yes', 'fluentform'),
+                    ),
+                    array(
+                        'value' => false,
+                        'label' => __('No', 'fluentform'),
+                    ),
+                ),
+        ),
     'min' =>
         array(
             'template' => 'inputText',

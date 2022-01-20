@@ -22,7 +22,7 @@
                         <el-tooltip class="item" placement="bottom-start" effect="light">
                             <div slot="content">
                                 <p>
-                                    Please select how the validation will apply
+                                    Please select how the validation will apply.
                                 </p>
                             </div>
                             <i class="el-icon-info el-text-info" />
@@ -41,7 +41,7 @@
                         <el-tooltip class="item" placement="bottom-start" effect="light">
                             <div slot="content">
                                 <p>
-                                    Please write the error message if the the form submission get invalid
+                                    Please write the error message if the form submission get invalid.
                                 </p>
                             </div>
                             <i class="el-icon-info el-text-info" />

@@ -318,6 +318,7 @@ class ShortCodeParser
                 }
             }
             $html .= '</tbody></table>';
+            apply_filters('fluentform_all_data_shortcode_html', $html, $formFields, $inputLabels, $response);
             return $html;
         }
 

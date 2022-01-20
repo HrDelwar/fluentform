@@ -22,6 +22,7 @@ class Converter
 		$imagePreloads = [];
 
 		$allowedFields = static::fieldTypes();
+		// dd($fields);
 		foreach ($fields as $field) {
 			$question = [
 				'id'                 => $field['uniqElKey'],
@@ -35,7 +36,6 @@ class Converter
 				'requiredMsg'        => ArrayHelper::get($field, 'settings.validation_rules.required.message'),
 				'errorMessage'       => ArrayHelper::get($field, 'settings.validation_rules.required.message'),
 				'validationRules'    => ArrayHelper::get($field, 'settings.validation_rules'),
-				'answer'             => self::setDefaultValue(ArrayHelper::get($field, 'attributes.value'), $field, $form),
 				'tagline'            => ArrayHelper::get($field, 'settings.help_message'),
 				'style_pref'         => ArrayHelper::get($field, 'style_pref', [
 					'layout'           => 'default',
@@ -47,6 +47,10 @@ class Converter
 				]),
 				'conditional_logics' => self::parseConditionalLogic($field)
 			];
+
+            if ($answer = self::setDefaultValue(ArrayHelper::get($field, 'attributes.value'), $field, $form)) {
+                $question['answer'] = $answer;
+            }
 
 			if (ArrayHelper::get($question, 'style_pref.layout') != 'default') {
 				$media = ArrayHelper::get($question, 'style_pref.media');
@@ -82,8 +86,21 @@ class Converter
 					$question['max_selection'] = $question['max_selection'] ? intval($question['max_selection']) : 0;
 				}
 			} elseif ($field['element'] === 'select_country') {
-				$options = array();
-				$countries = getFluentFormCountryList();
+                $countryComponent =  new \FluentForm\App\Services\FormBuilder\Components\SelectCountry();
+                $field = $countryComponent->loadCountries($field);
+                $activeList = ArrayHelper::get($field, 'settings.country_list.active_list');
+                if ($activeList == 'priority_based') {
+                    $selectCountries = ArrayHelper::get($field, 'settings.country_list.priority_based', []);
+                    $priorityCountries = $countryComponent->getSelectedCountries($selectCountries);
+                    // @todo : add opt group in conversation js
+                    $question['has_opt_grp'] = true;
+                    $primaryListLabel = ArrayHelper::get($field, 'settings.primary_label');
+                    $otherListLabel = ArrayHelper::get($field, 'settings.other_label');
+                    $field['options'] = array_merge($priorityCountries, $field['options']);
+                }
+
+                $options = array();
+				$countries = $field['options'];
 				foreach ($countries as $key => $value) {
 					$options[] = [
 						'label' => $value,
@@ -153,7 +170,176 @@ class Converter
 
 				$question['dateConfig'] = json_decode($dateField->getDateFormatConfigJSON($field['settings'], $form));
 				$question['dateCustomConfig'] = $dateField->getCustomConfig($field['settings']);
+			} elseif (in_array($field['element'], ['input_image', 'input_file'])) {
+                $question['multiple'] = true;
+
+                $maxFileCount = ArrayHelper::get($field, 'settings.validation_rules.max_file_count');
+                $maxFileSize = ArrayHelper::get($field, 'settings.validation_rules.max_file_size');
+
+                if ($field['element'] === 'input_image') {
+                    $allowedFieldTypes = ArrayHelper::get($field, 'settings.validation_rules.allowed_image_types.value');
+                } else {
+                    $allowedFieldTypes = ArrayHelper::get($field, 'settings.validation_rules.allowed_file_types.value');
+                }
+
+                if ($maxFileCount) {
+                    $question['max'] = $maxFileCount['value'];
+                }
+
+                if ($maxFileSize) {
+                    $question['maxSize'] = $maxFileSize['value'];
+                }
+
+                if ($allowedFieldTypes) {
+                    $question['accept'] = implode('|', $allowedFieldTypes);
+                }
+            } elseif ($field['element'] === 'tabular_grid') {
+                $question['grid_columns'] = $field['settings']['grid_columns'];
+                $question['grid_rows'] = $field['settings']['grid_rows'];
+                $question['selected_grids'] = $field['settings']['selected_grids'];
+                $question['multiple'] = $field['settings']['tabular_field_type'] === 'checkbox';
+
+                if ($field['settings']['selected_grids']) {
+                    $rowValues = array_keys($question['grid_rows']);
+                    $colValues = array_keys($question['grid_columns']);
+
+                    foreach ($field['settings']['selected_grids'] as $selected) {
+                        if (in_array($selected, $rowValues)) {
+                            $question['answer'][$selected] = $colValues;
+                        } else {
+                            foreach ($rowValues as $rowValue) {
+                                if ($question['multiple']) {
+                                    $question['answer'][$rowValue][] = $selected;
+                                } else {
+                                    $question['answer'][$rowValue] = $selected;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $question['requiredPerRow'] = ArrayHelper::get($field, 'settings.validation_rules.required.per_row');
+            } elseif ($field['element'] === 'multi_payment_component') {
+				$type = $field['attributes']['type'];
+
+				if ($type == 'single') {
+					$question['priceLabel'] = $field['settings']['price_label'];
+				} else {
+					$question['nextStepOnAnswer'] = true;
+
+					if ($type == 'radio' || $type == 'checkbox') {
+						$question['paymentType'] = 'MultipleChoiceType';
+						$question['type'] = 'FlowFormMultipleChoiceType';
+						$question = static::hasPictureMode($field, $question);
+
+						if ($type == 'checkbox') {
+							$question['multiple'] = true;
+						}
+					} else {
+						$question['paymentType'] = 'DropdownType';
+						$question['type'] = 'FlowFormDropdownType';
+					}
+
+					$question['options'] = $field['settings']['pricing_options'];
+				}
+
+				$question['is_payment_field'] = true;
+			} elseif ($field['element'] === 'subscription_payment_component') {
+				$question['is_payment_field'] = true;
+				$question['is_subscription_field'] = true;
+				$question['answer'] = null;
+				
+				$type = $field['attributes']['type'];
+				$question['subscriptionFieldType'] = $type;
+				$currency = \FluentFormPro\Payments\PaymentHelper::getFormCurrency($form->id);
+
+				foreach ($field['settings']['subscription_options'] as $index => &$option) {
+					$hasCustomPayment = false;
+
+					if (array_key_exists('user_input', $option) && $option['user_input'] == 'yes') {
+						$hasCustomPayment = true;
+						$option['subscription_amount'] = 0;
+
+						if (array_key_exists('user_input_default_value', $option)) {
+							$option['subscription_amount'] = $option['user_input_default_value'];
+						}
+					}
+					
+					$paymentSummaryText = \FluentFormPro\Payments\PaymentHelper::getPaymentSummaryText($option, $form->id, $currency, false);
+
+					$planValue = $type == 'single' ? $option['subscription_amount'] : $index;
+
+					$field['plans'][] = [
+						'label' => $option['name'],
+						'value' => $planValue,
+						'sub'   => strip_tags($paymentSummaryText),
+						'subscription_amount' => $planValue
+					];
+
+					$option['sub'] = strip_tags($paymentSummaryText);
+
+					if ($option['is_default'] == 'yes') {
+						$question['answer'] = $index;
+					}
+
+					if ($hasCustomPayment) {
+						$option['customInput'] = $question['name'] . '_custom_' . $index;
+						$question['customPayment'] = $option['subscription_amount'];
+					}
+				}
+
+				$question['plans'] = $field['settings']['subscription_options'];
+
+				if ($type != 'single') {
+					$question['options'] = $field['plans'];
+					$question['subscriptionFieldType'] = $field['settings']['selection_type'] == 'radio' ? 'FlowFormMultipleChoiceType' : 'FlowFormDropdownType';
+					$question['nextStepOnAnswer'] = true;
+				}
+			} elseif ($field['element'] === 'custom_payment_component') {
+				$question['type'] = 'FlowFormNumberType';
+				$question['min'] = ArrayHelper::get($field, 'settings.validation_rules.min.value');
+				$question['max'] = ArrayHelper::get($field, 'settings.validation_rules.max.value');
+				$question['min'] = is_numeric($question['min']) ? $question['min'] : null;
+				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
+
+				$question['is_payment_field'] = true;
+			} elseif ($field['element'] === 'item_quantity_component') {
+				$question['type'] = $allowedFields['input_number'];
+				$question['targetProduct'] = $field['settings']['target_product'];
+
+				$question['min'] = ArrayHelper::get($field, 'settings.validation_rules.min.value');
+				$question['max'] = ArrayHelper::get($field, 'settings.validation_rules.max.value');
+				$question['min'] = is_numeric($question['min']) ? $question['min'] : null;
+				$question['max'] = is_numeric($question['max']) ? $question['max'] : null;
+				$question['step'] = 1;
+				$question['stepErrorMsg'] = __('Please enter a valid value. The two nearest valid values are {lower_value} and {upper_value}', 'fluentform');
+			} elseif ($field['element'] === 'payment_method') {
+				$question['nextStepOnAnswer'] = true;
+				$question['options'] = [];
+				$question['paymentMethods'] = [];
+
+				foreach ($field['settings']['payment_methods'] as $methodName => $paymentMethod) {
+					if ($paymentMethod['enabled'] === 'yes') {
+						$question['options'][] = [
+							'label' => $paymentMethod['settings']['option_label']['value'],
+							'value' => $paymentMethod['method_value']
+						];
+
+						$question['paymentMethods'][$methodName] = $paymentMethod;
+
+						do_action(
+							'fluentform_rendering_payment_method_' . $methodName,
+							$paymentMethod,
+							$field,
+							$form
+						);
+					}
+				}
+			} elseif ($field['element'] === 'payment_summary_component') {
+				$question['title'] = 'Payment Summary';
+				$question['emptyText'] = $field['settings']['cart_empty_text'];
 			}
+
 			if ($question['type']) {
 				$questions[] = $question;
 			}
@@ -175,7 +361,6 @@ class Converter
 			'input_url'             => 'FlowFormUrlType',
 			'input_date'            => 'FlowFormDateType',
 			'input_text'            => 'FlowFormTextType',
-			'ratings'               => 'FlowFormRateType',
 			'input_email'           => 'FlowFormEmailType',
 			'input_hidden'          => 'FlowFormHiddenType',
 			'input_number'          => 'FlowFormNumberType',
@@ -189,12 +374,22 @@ class Converter
 			'input_checkbox'        => 'FlowFormMultipleChoiceType',
 			'input_radio'           => 'FlowFormMultipleChoiceType',
 			'terms_and_condition'   => 'FlowFormTermsAndConditionType',
-			'gdpr_agreement'        => 'FlowFormTermsAndConditionType',
-			'MultiplePictureChoice' => 'FlowFormMultiplePictureChoiceType',
+            'gdpr_agreement'        => 'FlowFormTermsAndConditionType',
+            'MultiplePictureChoice' => 'FlowFormMultiplePictureChoiceType',
 		];
 
 		if (defined('FLUENTFORMPRO')) {
 			$fieldTypes['phone'] = 'FlowFormPhoneType';
+			$fieldTypes['input_image'] = 'FlowFormFileType';
+			$fieldTypes['input_file'] = 'FlowFormFileType';
+			$fieldTypes['ratings'] = 'FlowFormRateType';
+			$fieldTypes['tabular_grid'] = 'FlowFormMatrixType';
+			$fieldTypes['payment_method'] = 'FlowFormPaymentMethodType';
+			$fieldTypes['multi_payment_component'] = 'FlowFormPaymentType';
+			$fieldTypes['custom_payment_component'] = 'FlowFormPaymentType';
+			$fieldTypes['payment_summary_component'] = 'FlowFormPaymentSummaryType';
+			$fieldTypes['subscription_payment_component'] = 'FlowFormSubscriptionType';
+			$fieldTypes['payment_coupon'] = 'FlowFormCouponType';
 		}
 
 		return $fieldTypes;

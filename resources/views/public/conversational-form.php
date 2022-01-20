@@ -115,7 +115,7 @@
     <div class="ff_conv_app ff_conv_app_frame fluent_form_<?php echo $form_id; ?> ff_conv_app_<?php echo $form_id; ?> ffc_media_hide_mob_<?php echo $design['hide_media_on_mobile']; ?>">
         <div data-var_name="fluent_forms_global_var" class="ffc_conv_form" style="width: 100%" id="ffc_app_landing">
             <div class="ffc_loading_screen">
-                <h2><?php _e('Loading...', 'fluent-form'); ?></h2>
+                <h2><?php _e('Loading...', 'fluentform'); ?></h2>
             </div>
         </div>
     </div>

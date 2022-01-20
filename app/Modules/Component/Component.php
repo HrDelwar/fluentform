@@ -113,11 +113,11 @@ class Component
     {
         global $post;
 
-        if (!$post) {
+        $postId = isset( $post->ID ) ? $post->ID : false;
+        if (!$postId) {
             return;
         }
-
-        $fluentFormIds = get_post_meta($post->ID, '_has_fluentform', true);
+        $fluentFormIds = get_post_meta($postId, '_has_fluentform', true);
         $hasFluentformMeta = is_a($post, 'WP_Post') && $fluentFormIds;
 
         if ($hasFluentformMeta || apply_filters('fluentform_load_styles', false, $post)) {
@@ -321,7 +321,10 @@ class Component
                 } else {
                     $countQuery = $countQuery->where('status', '=', sanitize_key($atts['status']));
                 }
-
+                if ($atts['payment_status'] && defined('FLUENTFORMPRO') && $atts['payment_status'] != 'all') {
+                    $countQuery = $countQuery->where('payment_status', '=', sanitize_key($atts['payment_status']));
+                }
+                
                 $total = $countQuery->count();
 
                 if ($atts['substract_from']) {
