@@ -80,6 +80,7 @@
                                 :inputs="inputs"
                                 :field="field"
                                 :settings="settings"
+                                :has_pro="has_pro"
                                 :editorShortcodes="editorShortcodes"
                                 :merge_model="settings[field.key]"
                                 :merge_fields="merge_fields" />
